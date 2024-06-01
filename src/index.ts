@@ -119,7 +119,7 @@ app.post('/watering', async (c) => {
 	const data = await c.req.json();
 	const planter = data.planter;
 	const results = await c.env.DB.prepare(
-		'INSERT INTO watering (soil_id, garden_id) SELECT s.id AS soil_id, g.id AS garden_id FROM garden g JOIN soil s ON g.id = s.garden_id WHERE g.planter = ? AND g.harvested = false ORDER BY s.measured DESC LIMIT 5'
+		'INSERT INTO watering (soil_id, garden_id) SELECT s.id AS soil_id, g.id AS garden_id FROM garden g JOIN soil s ON g.id = s.garden_id WHERE g.planter = ? AND g.harvested = false ORDER BY s.measured DESC LIMIT 1'
 	)
 		.bind(planter)
 		.run();
